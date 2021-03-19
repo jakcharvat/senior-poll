@@ -17,7 +17,7 @@ class Poll extends HTMLElement {
         const prompt = poll.prompt
         const options = poll.options
 
-        const promptEl = document.createElement('h3')
+        const promptEl = document.createElement('h4')
         promptEl.innerText = prompt
         this.appendChild(promptEl)
 
