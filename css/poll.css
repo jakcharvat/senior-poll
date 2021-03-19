@@ -41,6 +41,7 @@ poll-element logout-button button:hover::after {
 poll-element h4 {
     margin-left: 20px;
     margin-right: 20px;
+    margin-top: 60px;
 }
 
 
@@ -48,7 +49,7 @@ poll-element h4 {
 poll-element #optionsContainer {
     width: calc(100% - 40px);
     max-width: 600px;
-    margin: 60px auto 0 auto;
+    margin: 20px auto 0 auto;
 }
 
 
