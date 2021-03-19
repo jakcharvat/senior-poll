@@ -14,7 +14,7 @@ h3 {
 
 #app {
   margin-top: 60px;
-  padding-bottom: 10px;
+  padding-bottom: 60px;
 }
 
 
@@ -32,4 +32,21 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+
+#footer {
+  position: fixed;
+  right: 0px;
+  left: 0px;
+  bottom: 0px;
+  background: #fff3;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+
+#footer p {
+  text-align: end;
+  margin: 8px 12px;
 }
