@@ -151,6 +151,20 @@ option-element p {
 }
 
 
+@media screen and (max-width: 500px) {
+    option-element p.label {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    option-element p:not(.label) {
+        margin-top: auto;
+        margin-bottom: auto;
+    }
+}
+
+
 /* ----------------------------------------- Create Option Button ----------------------------------------- */
 create-option button {
     width: 100%;

@@ -24,6 +24,7 @@ class Option extends HTMLElement {
         const flexContainer = document.createElement('div')
         flexContainer.className = 'flex'
         const label = document.createElement('p')
+        label.className = 'label'
         flexContainer.appendChild(label)
         const trackSpan = document.createElement('span')
         trackSpan.className = 'bold'
