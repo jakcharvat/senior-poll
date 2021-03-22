@@ -65,8 +65,15 @@ poll-element create-option .row-half {
     font-size: 1.3rem;
     font-weight: bold;
     color: #2e0b6e;
+    margin: 3px auto;
 }
 
+poll-element option-element button:hover,
+poll-element create-option button:hover,
+poll-element create-option .row-half:hover {
+    box-shadow: 4px 4px #2e0b6e40;
+    transform: translate(-2px, -1px);
+}
 
 poll-element option-element.voted button {
     background: #2e0b6e;

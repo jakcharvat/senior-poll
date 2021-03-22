@@ -7,6 +7,7 @@
     "serve": "vite preview",
     "deploy": "npm run build && npm run build-complain && firebase deploy",
     "test": "npm run test --prefix complain",
+    "commit": "git add -- . ':!complain' && git commit -m ",
 
     "merge-index-complain": "mkdir -p dist/complain && cp complain/dist/index.html dist/complain/index.html",
     "merge-assets-complain": "cp -r complain/dist/assets/. dist/assets/",
