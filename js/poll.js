@@ -1,6 +1,6 @@
 import { LogoutButton } from './logoutButton.js'
 import '../css/poll.css'
-import { firestore } from './firebase.js'
+import { firestore, FieldValue } from './firebase.js'
 import { CreatePollOption } from './createPollOption.js'
 import { Option } from './option.js'
 
@@ -48,33 +48,28 @@ class Poll extends HTMLElement {
     async selectedOption(optionId, data) {
         const collection = firestore.collection('polls').doc(this.pollId).collection('options')
         
-        if (((await collection.doc(optionId).get()).data().voters ?? []).includes(this.user.uid)) {
-            collection.doc(optionId).set({
-                ...data,
-                voters: (data.voters ?? []).filter(voter => voter !== this.user.uid)
+        if ((await collection.doc(optionId).get()).data().voters?.includes(this.user.uid)) {
+            collection.doc(optionId).update({
+                voters: FieldValue.arrayRemove(this.user.uid)
             })
 
             return
         }
 
 
-        collection.doc(optionId).set({
-            ...data,
-            voters: [
-                ...(data.voters ?? []), this.user.uid
-            ]
+        collection.doc(optionId).update({
+            voters: FieldValue.arrayUnion(this.user.uid)
         })
 
 
-        const querySnapshot = await collection.where('voters', 'array-contains', this.user.uid).get()
-        querySnapshot.docs.forEach(doc => {
-            if (doc.id !== optionId) {
-                collection.doc(doc.id).set({
-                    ...doc.data(),
-                    voters: (doc.data().voters ?? []).filter(voter => voter !== this.user.uid)
-                })
-            }
-        })
+        // const querySnapshot = await collection.where('voters', 'array-contains', this.user.uid).get()
+        // querySnapshot.docs.forEach(doc => {
+        //     if (doc.id !== optionId) {
+        //         collection.doc(doc.id).update({
+        //             voters: FieldValue.arrayRemove(this.user.uid)
+        //         })
+        //     }
+        // })
     }
 
 

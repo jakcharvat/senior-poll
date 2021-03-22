@@ -5,7 +5,13 @@
     "dev": "vite",
     "build": "vite build",
     "serve": "vite preview",
-    "deploy": "npm run build && firebase deploy"
+    "deploy": "npm run build && npm run build-complain && firebase deploy",
+    "test": "npm run test --prefix complain",
+
+    "merge-index-complain": "mkdir -p dist/complain && cp complain/dist/index.html dist/complain/index.html",
+    "merge-assets-complain": "cp -r complain/dist/assets/. dist/assets/",
+    "merge-complain": "npm run merge-index-complain && npm run merge-assets-complain",
+    "build-complain": "npm run build --prefix complain && npm run merge-complain"
   },
   "devDependencies": {
     "vite": "^2.1.0"

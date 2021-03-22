@@ -21,6 +21,7 @@ if (!firebase.apps.length) {
     firebase.initializeApp(firebaseConfig)
 }
 
+export const FieldValue = firebase.firestore.FieldValue
 export const firestore = firebase.firestore()
 export const auth = firebase.auth()
 
