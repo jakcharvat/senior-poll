@@ -12,7 +12,9 @@
     "merge-index-complain": "mkdir -p dist/complain && cp complain/dist/index.html dist/complain/index.html",
     "merge-assets-complain": "cp -r complain/dist/assets/. dist/assets/",
     "merge-complain": "npm run merge-index-complain && npm run merge-assets-complain",
-    "build-complain": "npm run build --prefix complain && npm run merge-complain"
+    "build-complain": "npm run build --prefix complain && npm run merge-complain",
+
+    "clear-votes": "node ./js/scripts/clearVotes.js"
   },
   "devDependencies": {
     "vite": "^2.1.0"

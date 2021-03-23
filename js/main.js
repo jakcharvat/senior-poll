@@ -3,6 +3,8 @@ import { auth, firestore } from './firebase.js'
 import { Login } from './login.js'
 import { Poll } from './poll.js'
 
+import clearVotes from './scripts/clearVotes'
+
 
 const app = document.getElementById('app')
 const loginElement = new Login()
@@ -38,10 +40,15 @@ function showPoll(poll, user) {
 
 
 function showLogin() {
-  if (pollElement) { 
+  if (pollElement) {
     pollElement.remove()
     pollElement = null
   }
   app.appendChild(loginElement)
   loginElement.setup()
+}
+
+
+if (location.hostname === 'localhost') {
+  window.clearVotes = clearVotes
 }

@@ -74,9 +74,12 @@ class Poll extends HTMLElement {
 
     initPollChangeListener() {
         firestore.collection('polls').doc('QSWkryTrWldCJVd5iGhq').collection('options').onSnapshot(snapshot => {
+            let initialLoad = false
+
             if (this.loader) {
                 this.loader.remove()
                 this.loader = null
+                initialLoad = true
             }
 
             snapshot.docChanges().forEach(change => {
@@ -85,7 +88,9 @@ class Poll extends HTMLElement {
                     const data = doc.data()
                     const option = new Option(data, () => this.selectedOption(doc.id, data), this.user.uid)
                     this.options[doc.id] = option
-                    this.currentOptionsContainer.appendChild(option)
+                    if (!initialLoad) {
+                        this.currentOptionsContainer.appendChild(option)
+                    }
                 } else if (change.type === 'modified') {
                     this.options[doc.id].update(doc.data())
                 } else if (change.type === 'removed') {
@@ -93,6 +98,16 @@ class Poll extends HTMLElement {
                     delete this.options[doc.id]
                 }
             })
+
+            if (initialLoad) {
+                const sorted = Object.values(this.options).sort((a, b) => {
+                    return a.voteCount < b.voteCount
+                })
+
+                sorted.forEach(el => {
+                    this.currentOptionsContainer.appendChild(el)
+                })
+            }
         })
     }
 }

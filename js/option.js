@@ -34,12 +34,13 @@ class Option extends HTMLElement {
         artistSpan.className = 'regular'
         artistSpan.innerText = ` by ${optionData.artistName}`
         label.appendChild(artistSpan)
-        
+
         const votes = document.createElement('p')
-        const count = new Set(optionData.voters ?? []).size
+        const voteCount = new Set(optionData.voters ?? []).size
+        this.voteCount = voteCount
         const voteCountSpan = document.createElement('span')
         voteCountSpan.className = 'bold'
-        voteCountSpan.innerText = `${count} vote${count === 1 ? '' : 's'}`
+        voteCountSpan.innerText = `${voteCount} vote${voteCount === 1 ? '' : 's'}`
         votes.appendChild(voteCountSpan)
         const votedSpan = document.createElement('span')
         votedSpan.className = 'regular'
