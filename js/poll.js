@@ -12,7 +12,7 @@ class Poll extends HTMLElement {
         this.user = user
         this.pollId = pollDoc.id
         this.options = { }
-        
+
         const poll = pollDoc.data()
         const prompt = poll.prompt
         const options = poll.options
@@ -47,7 +47,7 @@ class Poll extends HTMLElement {
 
     async selectedOption(optionId, data) {
         const collection = firestore.collection('polls').doc(this.pollId).collection('options')
-        
+
         if ((await collection.doc(optionId).get()).data().voters?.includes(this.user.uid)) {
             collection.doc(optionId).update({
                 voters: FieldValue.arrayRemove(this.user.uid)
@@ -61,15 +61,14 @@ class Poll extends HTMLElement {
             voters: FieldValue.arrayUnion(this.user.uid)
         })
 
-
-        // const querySnapshot = await collection.where('voters', 'array-contains', this.user.uid).get()
-        // querySnapshot.docs.forEach(doc => {
-        //     if (doc.id !== optionId) {
-        //         collection.doc(doc.id).update({
-        //             voters: FieldValue.arrayRemove(this.user.uid)
-        //         })
-        //     }
-        // })
+        const querySnapshot = await collection.where('voters', 'array-contains', this.user.uid).get()
+        querySnapshot.docs.forEach(doc => {
+            if (doc.id !== optionId) {
+                collection.doc(doc.id).update({
+                    voters: FieldValue.arrayRemove(this.user.uid)
+                })
+            }
+        })
     }
 
 
