@@ -113,7 +113,6 @@ class Poll extends HTMLElement {
 }
 
 
-
 export { Poll }
 
 customElements.define('poll-element', Poll)
