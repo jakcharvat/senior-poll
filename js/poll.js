@@ -37,7 +37,7 @@ class Poll extends HTMLElement {
         const hr = document.createElement('hr')
         optionsContainer.appendChild(hr)
 
-        const newOptionEl = new CreatePollOption(poll)
+        const newOptionEl = new CreatePollOption(poll, user)
         this.newOptionEl = newOptionEl
         optionsContainer.appendChild(newOptionEl)
 

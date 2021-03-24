@@ -1,12 +1,12 @@
 import { firestore } from './firebase.js'
-import { v4 as uuidv4 } from 'uuid'
 
 
 class CreatePollOption extends HTMLElement {
-    constructor(poll) {
+    constructor(poll, user) {
         super()
 
         this.poll = poll
+        this.user = user
 
         const button = document.createElement('button')
         button.onclick = () => this.startInput()
@@ -78,7 +78,11 @@ class CreatePollOption extends HTMLElement {
 
         firestore.collection('polls').doc('QSWkryTrWldCJVd5iGhq').collection('options').add({
             trackName: track,
-            artistName: artist
+            artistName: artist,
+            createdBy: {
+                uid: this.user.uid,
+                email: this.user.email
+            }
         })
     }
 
