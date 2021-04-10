@@ -94,4 +94,4 @@ class CreatePollOption extends HTMLElement {
 
 
 customElements.define('create-option', CreatePollOption)
-export { CreatePollOption as CreatePollOption }
+export { CreatePollOption }
